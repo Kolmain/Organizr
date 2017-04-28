@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $data = false;
 
@@ -40,9 +40,9 @@ $hasOptions = "No";
 foreach($dbTab as $row) :
 
     if (in_array("tabs", $row)) :
-    
+
         $tabSetup = "No";
-    
+
     endif;
 
 endforeach;
@@ -50,9 +50,9 @@ endforeach;
 foreach($dbOptions as $row) :
 
     if (in_array("options", $row)) :
-    
+
         $hasOptions = "Yes";
-    
+
     endif;
 
 endforeach;
@@ -60,17 +60,17 @@ endforeach;
 if($hasOptions == "No") :
 
     $title = "Organizr";
-    $topbar = "#333333"; 
-    $topbartext = "#66D9EF";
+    $topbar = "#333333";
+    $topbartext = "#FFFFFF";
     $bottombar = "#333333";
     $sidebar = "#393939";
-    $hoverbg = "#AD80FD";
-    $activetabBG = "#F92671";
+    $hoverbg = "#ECECEC";
+    $activetabBG = "#E5A00D";
     $activetabicon = "#FFFFFF";
     $activetabtext = "#FFFFFF";
-    $inactiveicon = "#66D9EF";
-    $inactivetext = "#66D9EF";
-    $loading = "#66D9EF";
+    $inactiveicon = "#FFFFFF";
+    $inactivetext = "#999999";
+    $loading = "#3F4245";
     $hovertext = "#000000";
 
 endif;
@@ -78,31 +78,31 @@ endif;
 if($tabSetup == "No") :
 
     $result = $file_db->query('SELECT * FROM tabs');
-    
+
 endif;
 
 if($hasOptions == "Yes") :
 
     $resulto = $file_db->query('SELECT * FROM options');
-    
+
 endif;
 
-if($hasOptions == "Yes") : 
-                                    
-    foreach($resulto as $row) : 
+if($hasOptions == "Yes") :
+
+    foreach($resulto as $row) :
 
         $title = isset($row['title']) ? $row['title'] : "Organizr";
-        $topbartext = isset($row['topbartext']) ? $row['topbartext'] : "#66D9EF";
+        $topbartext = isset($row['topbartext']) ? $row['topbartext'] : "#FFFFFF";
         $topbar = isset($row['topbar']) ? $row['topbar'] : "#333333";
         $bottombar = isset($row['bottombar']) ? $row['bottombar'] : "#333333";
         $sidebar = isset($row['sidebar']) ? $row['sidebar'] : "#393939";
-        $hoverbg = isset($row['hoverbg']) ? $row['hoverbg'] : "#AD80FD";
-        $activetabBG = isset($row['activetabBG']) ? $row['activetabBG'] : "#F92671";
+        $hoverbg = isset($row['hoverbg']) ? $row['hoverbg'] : "#ECECEC";
+        $activetabBG = isset($row['activetabBG']) ? $row['activetabBG'] : "#E5A00D";
         $activetabicon = isset($row['activetabicon']) ? $row['activetabicon'] : "#FFFFFF";
         $activetabtext = isset($row['activetabtext']) ? $row['activetabtext'] : "#FFFFFF";
-        $inactiveicon = isset($row['inactiveicon']) ? $row['inactiveicon'] : "#66D9EF";
-        $inactivetext = isset($row['inactivetext']) ? $row['inactivetext'] : "#66D9EF";
-        $loading = isset($row['loading']) ? $row['loading'] : "#66D9EF";
+        $inactiveicon = isset($row['inactiveicon']) ? $row['inactiveicon'] : "#FFFFFF";
+        $inactivetext = isset($row['inactivetext']) ? $row['inactivetext'] : "#999999";
+        $loading = isset($row['loading']) ? $row['loading'] : "#3F4245";
         $hovertext = isset($row['hovertext']) ? $row['hovertext'] : "#000000";
 
     endforeach;
@@ -110,15 +110,15 @@ if($hasOptions == "Yes") :
 endif;
 
 $action = "";
-                
+
 if(isset($_POST['action'])) :
 
     $action = $_POST['action'];
-    
+
 endif;
 
-if($action == "deleteDB") : 
-                     
+if($action == "deleteDB") :
+
     unset($_COOKIE['Organizr']);
     setcookie('Organizr', '', time() - 3600, '/');
     unset($_COOKIE['OrganizrU']);
@@ -126,13 +126,13 @@ if($action == "deleteDB") :
 
     $file_db = null;
 
-    unlink($dbfile); 
+    unlink($dbfile);
 
-    foreach(glob($userdirpath . '/*') as $file) : 
+    foreach(glob($userdirpath . '/*') as $file) :
 
         if(is_dir($file)) :
 
-            rmdir($file); 
+            rmdir($file);
 
         elseif(!is_dir($file)) :
 
@@ -140,7 +140,7 @@ if($action == "deleteDB") :
 
         endif;
 
-    endforeach; 
+    endforeach;
 
     rmdir($userdirpath);
 
@@ -148,16 +148,16 @@ if($action == "deleteDB") :
 
 endif;
 
-if($action == "deleteLog") : 
-                     
-    unlink(FAIL_LOG); 
+if($action == "deleteLog") :
+
+    unlink(FAIL_LOG);
 
    echo "<script type='text/javascript'>window.location.replace('settings.php');</script>";
 
 endif;
 
-if($action == "upgrade") : 
-                     
+if($action == "upgrade") :
+
     function downloadFile($url, $path){
 
         $folderPath = "upgrade/";
@@ -215,7 +215,7 @@ if($action == "upgrade") :
 
     }
 
-    // Function to remove folders and files 
+    // Function to remove folders and files
     function rrmdir($dir) {
 
         if (is_dir($dir)) {
@@ -234,7 +234,7 @@ if($action == "upgrade") :
 
     }
 
-    // Function to Copy folders and files       
+    // Function to Copy folders and files
     function rcopy($src, $dst) {
 
         if (is_dir ( $src )) {
@@ -281,25 +281,25 @@ if($action == 'createLocation' || $action == 'homepageSettings') {
     echo "<script>parent.notify('<strong>".$language->translate("SETTINGS_SAVED")."</strong>','floppy-o','success','5000', '$notifyExplode[0]', '$notifyExplode[1]');</script>";
     echo "<script>setTimeout(function() {window.location.href = window.location.href},1500);</script>";
 }
-                
+
 if(!isset($_POST['op'])) :
 
     $_POST['op'] = "";
-    
-endif; 
+
+endif;
 
 if($action == "addTabz") :
-    
+
     if($tabSetup == "No") :
 
         $file_db->exec("DELETE FROM tabs");
-        
+
     endif;
-    
+
     if($tabSetup == "Yes") :
-    
+
         $file_db->exec("CREATE TABLE tabs (name TEXT UNIQUE, url TEXT, defaultz TEXT, active TEXT, user TEXT, guest TEXT, icon TEXT, iconurl TEXT, window TEXT)");
-        
+
     endif;
 
     $addTabName = array();
@@ -314,87 +314,87 @@ if($action == "addTabz") :
     $buildArray = array();
 
     foreach ($_POST as $key => $value) :
-    
+
         $trueKey = explode('-', $key);
-        
+
         if ($value == "on") :
-        
+
             $value = "true";
-            
+
         endif;
-        
+
         if($trueKey[0] == "name"):
-            
+
             array_push($addTabName, $value);
-            
+
         endif;
-        
+
         if($trueKey[0] == "url"):
-            
+
             array_push($addTabUrl, $value);
-            
+
         endif;
-        
+
         if($trueKey[0] == "icon"):
-            
+
             array_push($addTabIcon, $value);
-            
+
         endif;
 
         if($trueKey[0] == "iconurl"):
-            
+
             array_push($addTabIconUrl, $value);
-            
+
         endif;
-        
+
         if($trueKey[0] == "default"):
-            
+
             array_push($addTabDefault, $value);
-            
+
         endif;
-        
+
         if($trueKey[0] == "active"):
-            
+
             array_push($addTabActive, $value);
-            
+
         endif;
-        
+
         if($trueKey[0] == "user"):
-            
+
             array_push($addTabUser, $value);
-            
+
         endif;
-        
+
         if($trueKey[0] == "guest"):
-            
+
             array_push($addTabGuest, $value);
-            
-        endif; 
+
+        endif;
 
         if($trueKey[0] == "window"):
-            
+
             array_push($addTabWindow, $value);
-            
-        endif;  
-        
+
+        endif;
+
     endforeach;
 
     $tabArray = 0;
-    
-    if(count($addTabName) > 0) : 
-        
+
+    if(count($addTabName) > 0) :
+
         foreach(range(1,count($addTabName)) as $index) :
-        
+
             if(!isset($addTabDefault[$tabArray])) :
-                
+
                 $tabDefault = "false";
-            
+
             else :
-                
+
                 $tabDefault = $addTabDefault[$tabArray];
-            
+
             endif;
-            
+
             $buildArray[] = array('name' => $addTabName[$tabArray],
                   'url' => $addTabUrl[$tabArray],
                   'defaultz' => $tabDefault,
@@ -406,16 +406,16 @@ if($action == "addTabz") :
                   'iconurl' => $addTabIconUrl[$tabArray]);
 
             $tabArray++;
-        
+
         endforeach;
-        
-    endif; 
-    
-    $insert = "INSERT INTO tabs (name, url, defaultz, active, user, guest, icon, iconurl, window) 
+
+    endif;
+
+    $insert = "INSERT INTO tabs (name, url, defaultz, active, user, guest, icon, iconurl, window)
                 VALUES (:name, :url, :defaultz, :active, :user, :guest, :icon, :iconurl, :window)";
-                
+
     $stmt = $file_db->prepare($insert);
-    
+
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':url', $url);
     $stmt->bindParam(':defaultz', $defaultz);
@@ -425,9 +425,9 @@ if($action == "addTabz") :
     $stmt->bindParam(':icon', $icon);
     $stmt->bindParam(':iconurl', $iconurl);
     $stmt->bindParam(':window', $window);
-    
+
     foreach ($buildArray as $t) :
-    
+
         $name = $t['name'];
         $url = $t['url'];
         $defaultz = $t['defaultz'];
@@ -439,25 +439,25 @@ if($action == "addTabz") :
         $window = $t['window'];
 
         $stmt->execute();
-        
+
     endforeach;
-    
+
 endif;
 
 if($action == "addOptionz") :
-    
+
     if($hasOptions == "Yes") :
-    
+
         $file_db->exec("DELETE FROM options");
-        
+
     endif;
-    
+
     if($hasOptions == "No") :
 
         $file_db->exec("CREATE TABLE options (title TEXT UNIQUE, topbar TEXT, bottombar TEXT, sidebar TEXT, hoverbg TEXT, topbartext TEXT, activetabBG TEXT, activetabicon TEXT, activetabtext TEXT, inactiveicon TEXT, inactivetext TEXT, loading TEXT, hovertext TEXT)");
-        
+
     endif;
-            
+
     $title = $_POST['title'];
     $topbartext = $_POST['topbartext'];
     $topbar = $_POST['topbar'];
@@ -472,11 +472,11 @@ if($action == "addOptionz") :
     $inactivetext = $_POST['inactivetext'];
     $loading = $_POST['loading'];
 
-    $insert = "INSERT INTO options (title, topbartext, topbar, bottombar, sidebar, hoverbg, activetabBG, activetabicon, activetabtext, inactiveicon, inactivetext, loading, hovertext) 
+    $insert = "INSERT INTO options (title, topbartext, topbar, bottombar, sidebar, hoverbg, activetabBG, activetabicon, activetabtext, inactiveicon, inactivetext, loading, hovertext)
                 VALUES (:title, :topbartext, :topbar, :bottombar, :sidebar, :hoverbg, :activetabBG, :activetabicon , :activetabtext , :inactiveicon, :inactivetext, :loading, :hovertext)";
-                
+
     $stmt = $file_db->prepare($insert);
-    
+
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':topbartext', $topbartext);
     $stmt->bindParam(':topbar', $topbar);
@@ -503,7 +503,7 @@ if(SLIMBAR == "true") : $slimBar = "30"; $userSize = "25"; else : $slimBar = "56
 <html lang="en" class="no-js">
 
     <head>
-        
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -515,14 +515,14 @@ if(SLIMBAR == "true") : $slimBar = "30"; $userSize = "25"; else : $slimBar = "56
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="bower_components/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.min.css">
-        <link rel="stylesheet" href="bower_components/Waves/dist/waves.min.css"> 
-        <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"> 
+        <link rel="stylesheet" href="bower_components/Waves/dist/waves.min.css">
+        <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
 
         <link rel="stylesheet" href="js/selects/cs-select.css">
         <link rel="stylesheet" href="js/selects/cs-skin-elastic.css">
         <link href="bower_components/iconpick/dist/css/fontawesome-iconpicker.min.css" rel="stylesheet">
         <link rel="stylesheet" href="bower_components/google-material-color/dist/palette.css">
-        
+
         <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
         <link rel="stylesheet" href="bower_components/smoke/dist/css/smoke.min.css">
 
@@ -542,11 +542,11 @@ if(SLIMBAR == "true") : $slimBar = "30"; $userSize = "25"; else : $slimBar = "56
         <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
         <script src="bower_components/respondJs/dest/respond.min.js"></script>
         <![endif]-->
-        
+
     </head>
 
     <body class="scroller-body" style="padding: 0; background: #273238; overflow: hidden">
-        
+
         <style>
             @media screen and (max-width:737px){
                 .email-body{width: 100%; overflow: auto;}
@@ -557,7 +557,7 @@ if(SLIMBAR == "true") : $slimBar = "30"; $userSize = "25"; else : $slimBar = "56
                     position: fixed;
                     height:100% !important;
                     margin-top:0;
-      
+
 
                 }.email-content .email-header, .email-new .email-header{
                     padding: 10px 30px;
@@ -633,7 +633,7 @@ if(SLIMBAR == "true") : $slimBar = "30"; $userSize = "25"; else : $slimBar = "56
                 width:auto;
                 padding:0 12px;
             }.dragging{
-                border: 2px solid;    
+                border: 2px solid;
             }.todo .action-btns a span {
                 color: #76828e !important;
             }.todo li:nth-child(even) {
@@ -643,10 +643,10 @@ if(SLIMBAR == "true") : $slimBar = "30"; $userSize = "25"; else : $slimBar = "56
                 left: 160px;
                 top: 0px;
                 height: 400px;
-            }.chooseTheme a span { 
-                position:absolute; display:none; z-index:99; 
-            }.chooseTheme a:hover span { 
-                display:block; 
+            }.chooseTheme a span {
+                position:absolute; display:none; z-index:99;
+            }.chooseTheme a:hover span {
+                display:block;
             }ul.nav.nav-tabs.apps {
                 border: solid;
                 border-top: 0;
@@ -658,29 +658,29 @@ if(SLIMBAR == "true") : $slimBar = "30"; $userSize = "25"; else : $slimBar = "56
                 border-bottom: 0;
                 border-radius: 5px;
                 top: 3px;
-}<?php if(CUSTOMCSS == "true") : 
+}<?php if(CUSTOMCSS == "true") :
 $template_file = "custom.css";
 $file_handle = fopen($template_file, "rb");
 echo fread($file_handle, filesize($template_file));
 fclose($file_handle);
 echo "\n";
 endif; ?>
-       
+
         </style>
-       
+
         <div id="main-wrapper" class="main-wrapper">
 
             <!--Content-->
             <div id="content"  style="margin:0 10px; overflow:hidden">
- 
+
                 <br/>
-                
+
                 <div id="versionCheck"></div>
-                            
+
                 <div class="row">
-                    
+
                     <div class="col-lg-2">
-                        
+
                         <?php if($action) : ?>
 
                         <button id="apply" style="width: 100%" class="btn waves btn-success btn-sm text-uppercase waves-effect waves-float animated tada" type="submit">
@@ -690,9 +690,9 @@ endif; ?>
                         </button>
 
                         <?php endif; ?>
-                        
+
                         <div class="content-box profile-sidebar box-shadow">
-                            
+
                             <img src="images/organizr-logo-h-d.png" width="100%" style="margin-top: -10px;">
 
                             <div class="profile-usermenu">
@@ -712,33 +712,33 @@ endif; ?>
                             </div>
 
                         </div>
-              
+
                     </div>
-                
+
                     <div class="col-lg-10">
-                        
-                        
-   
+
+
+
                     </div>
-                              
+
                 </div>
-            
+
                 <div class="email-content tab-box white-bg">
-                
+
                     <div class="email-body">
-                
+
                         <div class="email-header gray-bg">
-                 
+
                             <button type="button" class="btn btn-danger btn-sm waves close-button"><i class="fa fa-close"></i></button>
-                  
+
                             <h1>Edit Tabs</h1>
-                
+
                         </div>
-                
+
                         <div class="email-inner small-box">
-                  
+
                             <div class="email-inner-section">
-                                
+
                                 <div class="small-box todo-list fade in" id="tab-tabs">
 
                                     <div class="sort-todo">
@@ -767,7 +767,7 @@ endif; ?>
 
                                         <div class="row">
 
-                                            <textarea id="copyTarget" class="hideCopy" style="left: -9999px; top: 0; position: absolute;"></textarea>                                           
+                                            <textarea id="copyTarget" class="hideCopy" style="left: -9999px; top: 0; position: absolute;"></textarea>
                                             <?php
                                             $dirname = "images/";
                                             $images = scandir($dirname);
@@ -775,7 +775,7 @@ endif; ?>
                                             foreach($images as $curimg){
                                                 if(!in_array($curimg, $ignore)) { ?>
 
-                                            <div class="col-xs-2" style="width: 75px; height: 75px; padding-right: 0px;">    
+                                            <div class="col-xs-2" style="width: 75px; height: 75px; padding-right: 0px;">
 
                                                 <a data-toggle="tooltip" data-placement="bottom" title="<?=$dirname.$curimg;?>" class="thumbnail" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 
@@ -822,9 +822,9 @@ endif; ?>
 
                                                 <ul class="list-group ui-sortable">
 
-                                                    <?php if($tabSetup == "No") : $tabNum = 1; 
+                                                    <?php if($tabSetup == "No") : $tabNum = 1;
 
-                                                    foreach($result as $row) : 
+                                                    foreach($result as $row) :
 
                                                     if($row['defaultz'] == "true") : $default = "checked"; else : $default = ""; endif;
                                                     if($row['active'] == "true") : $activez = "checked"; else : $activez = ""; endif;
@@ -974,79 +974,79 @@ endif; ?>
                                     </div>
 
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
 
                 <div class="email-content color-box white-bg">
-                
+
                     <div class="email-body">
-                
+
                         <div class="email-header gray-bg">
-                 
+
                             <button type="button" class="btn btn-danger btn-sm waves close-button"><i class="fa fa-close"></i></button>
-                  
+
                             <h1>Color Settings</h1>
-                
+
                         </div>
-                
+
                         <div class="email-inner small-box">
-                  
+
                             <div class="email-inner-section">
-                                
+
                                 <div class="small-box fade in" id="customedit">
 
                                     <form id="add_optionz" method="post">
-                                        
+
                                         <input type="hidden" name="action" value="addOptionz" />
-                                        
+
                                         <div class="btn-group">
-                                            
+
                                             <button type="button" class="btn btn-dark dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <?php echo $language->translate("CHOOSE_THEME");?>  <span class="caret"></span>
                                             </button>
-                                            
+
                                             <ul class="dropdown-menu gray-bg">
-                                            
+
                                                 <li class="chooseTheme" id="plexTheme" style="border: 1px #FFFFFF; border-style: groove; background: #000000; border-radius: 5px; margin: 5px;"><a style="color: #E49F0C !important;" href="#">Plex<span><img class="themeImage" src="images/themes/plex.png"></span></a></li>
-                                                
+
                                                 <li class="chooseTheme" id="newPlexTheme" style="border: 1px #E5A00D; border-style: groove; background: #282A2D; border-radius: 5px; margin: 5px;"><a style="color: #E5A00D !important;" href="#">New Plex<span><img class="themeImage" src="images/themes/newplex.png"></span></a></li>
-                                            
+
                                                 <li class="chooseTheme" id="embyTheme" style="border: 1px #FFFFFF; border-style: groove; background: #212121; border-radius: 5px; margin: 5px;"><a style="color: #52B54B !important;" href="#">Emby<span><img class="themeImage" src="images/themes/emby.png"></span></a></li>
-                                                
+
                                                 <li class="chooseTheme" id="bookTheme" style="border: 1px #FFFFFF; border-style: groove; background: #3B5998; border-radius: 5px; margin: 5px;"><a style="color: #FFFFFF !important;" href="#">Facebook<span><img class="themeImage" src="images/themes/facebook.png"></span></a></li>
-                                                
+
                                                 <li class="chooseTheme" id="spaTheme" style="border: 1px #66BBAE; border-style: groove; background: #66BBAE; border-radius: 5px; margin: 5px;"><a style="color: #5B391E !important;" href="#">Spa<span><img class="themeImage" src="images/themes/spa.png"></span></a></li>
-                                                
+
                                                 <li class="chooseTheme" id="darklyTheme" style="border: 1px #464545; border-style: groove; background: #375A7F; border-radius: 5px; margin: 5px;"><a style="color: #FFFFFF !important;" href="#">Darkly<span><img class="themeImage" src="images/themes/darkly.png"></span></a></li>
-                                                
+
                                                 <li class="chooseTheme" id="slateTheme" style="border: 1px #58C0DE; border-style: groove; background: #272B30; border-radius: 5px; margin: 5px;"><a style="color: #C8C8C8 !important;" href="#">Slate<span><img class="themeImage" src="images/themes/slate.png"></span></a></li>
-                                                
+
                                                 <li class="chooseTheme" id="monokaiTheme" style="border: 1px #AD80FD; border-style: groove; background: #333333; border-radius: 5px; margin: 5px;"><a style="color: #66D9EF !important;" href="#">Monokai<span><img class="themeImage" src="images/themes/monokai.png"></span></a></li>
-                                                
+
                                                 <li class="chooseTheme" id="thejokerTheme" style="border: 1px #CCC6CC; border-style: groove; background: #000000; border-radius: 5px; margin: 5px;"><a style="color: #CCCCCC !important;" href="#">The Joker<span><img class="themeImage" src="images/themes/joker.png"></span></a></li>
-                                                
+
                                                 <li class="chooseTheme" id="redTheme" style="border: 1px #eb6363; border-style: groove; background: #eb6363; border-radius: 5px; margin: 5px;"><a style="color: #FFFFFF !important;" href="#">Original Red<span><img class="themeImage" src="images/themes/original.png"></span></a></li>
-                                            
+
                                             </ul>
-                                            
+
                                         </div>
-                                        
+
                                         <button id="editCssButton" class="btn waves btn-labeled btn-primary btn-sm text-uppercase waves-effect waves-float" type="button">
-                                                
+
                                                 <span class="btn-label"><i class="fa fa-css3"></i></span><?php echo $language->translate("EDIT_CUSTOM_CSS");?>
-                                                
+
                                         </button>
-                                        
+
                                         <button class="btn waves btn-labeled btn-success btn-sm pull-right text-uppercase waves-effect waves-float" type="submit">
-                                                
+
                                                 <span class="btn-label"><i class="fa fa-floppy-o"></i></span><?php echo $language->translate("SAVE_OPTIONS");?>
-                                                
+
                                         </button>
 
                                         <div class="big-box grids">
@@ -1070,7 +1070,7 @@ endif; ?>
                                                     <input name="topbartext" id="topbartext" class="form-control jscolor {hash:true}" value="<?=$topbartext;?>">
 
                                                 </div>
-                                                
+
                                                 <div class="col-md-4 gray-bg">
 
                                                     <center><?php echo $language->translate("LOADING_COLOR");?></center>
@@ -1110,9 +1110,9 @@ endif; ?>
                                                     <input name="sidebar" id="sidebar" class="form-control jscolor {hash:true}" value="<?=$sidebar;?>">
 
                                                 </div>
-                                                
+
                                             </div>
-                                            
+
                                             <div class="row show-grids col-lg-12">
 
                                                 <div class="col-md-6 gray-bg">
@@ -1122,7 +1122,7 @@ endif; ?>
                                                     <input name="hoverbg" id="hoverbg" class="form-control jscolor {hash:true}" value="<?=$hoverbg;?>">
 
                                                 </div>
-                                                
+
                                                 <div class="col-md-6 gray-bg">
 
                                                     <center><?php echo $language->translate("HOVER_TEXT");?></center>
@@ -1186,32 +1186,32 @@ endif; ?>
                                             </div>
 
                                         </div>
-                                        
+
                                     </form>
-                                    
+
                                      <form style="display: none" id="editCssForm" method="POST" action="ajax.php">
-                                         
+
                                          <button class="btn waves btn-labeled btn-warning btn-sm pull-left text-uppercase waves-effect waves-float" type="button" id="backToThemeButton">
 
                                             <span class="btn-label"><i class="fa fa-arrow-left"></i></span><?php echo $language->translate("GO_BACK");?>
-                                                
+
                                         </button>
-                                        
-                                         
+
+
                                          <button class="btn waves btn-labeled btn-success btn-sm pull-right text-uppercase waves-effect waves-float" type="submit">
 
                                             <span class="btn-label"><i class="fa fa-floppy-o"></i></span><?php echo $language->translate("SAVE_CSS");?>
-                                                
+
                                         </button>
-                                         
+
                                         <br><br>
-                                        
-                                        <input type="hidden" name="submit" value="editCSS" /> 
-                                         
-                                        <h1><?php echo $language->translate("EDIT_CUSTOM_CSS");?></h1> 
-                                         
+
+                                        <input type="hidden" name="submit" value="editCSS" />
+
+                                        <h1><?php echo $language->translate("EDIT_CUSTOM_CSS");?></h1>
+
                                          <!--<p>Variables Available<code>$topbar - $topbartext - $bottombar - $sidebar - $hoverbg - $activetabBG - $activetabicon - $activetabtext - $inactiveicon - $inactivetext - $loading - $hovertext</code></p>-->
-                                         
+
                                         <textarea class="form-control" id="css-show" name="css-show" rows="25" style="background: #000; color: #FFF;">
 <?php if(CUSTOMCSS == "true") :
 $template_file = "custom.css";
@@ -1219,48 +1219,48 @@ $file_handle = fopen($template_file, "rb");
 echo fread($file_handle, filesize($template_file));
 fclose($file_handle);
 endif;?></textarea>
-                                                                        
+
                                     </form>
-                      
+
                                 </div>
-                  
+
                             </div>
 
                         </div>
-                
+
                     </div>
-                
+
                 </div>
-    
+
                 <div class="email-content homepage-box white-bg">
-                
+
                     <div class="email-body">
-                
+
                         <div class="email-header gray-bg">
-                 
+
                             <button type="button" class="btn btn-danger btn-sm waves close-button"><i class="fa fa-close"></i></button>
-                  
+
                             <h1>Homepage Settings</h1>
-                
+
                         </div>
-                
+
                         <div class="email-inner small-box">
-                  
+
                             <div class="email-inner-section">
-                                
+
                                 <div class="small-box fade in" id="homepageSettings">
-                                    
+
                                     <div class="row">
-                                        
-                                        
+
+
                                         <div class="col-lg-12">
-                                            
-                                            <form class="content-form" name="homepageSettings" id="homepageSettings" action="" method="POST">    
-                                            
+
+                                            <form class="content-form" name="homepageSettings" id="homepageSettings" action="" method="POST">
+
                                                 <div class="tabbable tabs-with-bg" id="homepage-tabs">
-                                                                                                    
+
                                                     <input type="hidden" name="action" value="homepageSettings" />
-                                                
+
                                                     <ul class="nav nav-tabs apps">
 
                                                         <li class="apps active">
@@ -1268,7 +1268,7 @@ endif;?></textarea>
                                                             <a href="#tab-plex" data-toggle="tab" aria-expanded="true"><img style="height:40px; width:40px;" src="images/plex.png"></a>
 
                                                         </li>
-							    
+
                                                         <li class="apps">
 
                                                             <a href="#tab-emby" data-toggle="tab" aria-expanded="false"><img style="height:40px; width:40px;" src="images/emby.png"></a>
@@ -1286,31 +1286,31 @@ endif;?></textarea>
                                                             <a href="#tab-radarr" data-toggle="tab" aria-expanded="false"><img style="height:40px; width:40px;" src="images/radarr.png"></a>
 
                                                         </li>
-                                                        
+
                                                         <li class="apps ">
 
                                                             <a href="#tab-sickrage" data-toggle="tab" aria-expanded="false"><img style="height:40px; width:40px;" src="images/sickrage.png"></a>
 
                                                         </li>
-                                                        
+
                                                         <li class="apps ">
 
                                                             <a href="#tab-nzbget" data-toggle="tab" aria-expanded="false"><img style="height:40px; width:40px;" src="images/nzbget.png"></a>
 
                                                         </li>
-                                                        
+
                                                         <li class="apps ">
 
                                                             <a href="#tab-sabnzbd" data-toggle="tab" aria-expanded="false"><img style="height:40px; width:40px;" src="images/sabnzbd.png"></a>
 
                                                         </li>
-                                                        
+
                                                         <li class="apps ">
 
                                                             <a href="#tab-headphones" data-toggle="tab" aria-expanded="false"><img style="height:40px; width:40px;" src="images/headphones.png"></a>
 
                                                         </li>
-                                                        
+
                                                         <li class="apps ">
 
                                                             <a href="#tab-calendar" data-toggle="tab" aria-expanded="false"><img style="height:40px; width:40px;" src="images/calendar.png"></a>
@@ -1438,7 +1438,7 @@ endif;?></textarea>
                                                             </div>
 
                                                         </div>
-							    
+
                                                         <div class="tab-pane big-box fade" id="tab-sonarr">
 
                                                             <div class="form-group">
@@ -1456,9 +1456,9 @@ endif;?></textarea>
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                         <div class="tab-pane big-box fade" id="tab-sickrage">
-                                                            
+
                                                             <div class="form-group">
 
                                                                 <input type="text" class="form-control material input-sm" name="sickrageURL" placeholder="<?php echo $language->translate("SICK_URL");?>" autocorrect="off" autocapitalize="off" value="<?php echo SICKRAGEURL;?>">
@@ -1492,7 +1492,7 @@ endif;?></textarea>
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                         <div class="tab-pane big-box fade" id="tab-nzbget">
 
                                                             <div class="form-group">
@@ -1508,7 +1508,7 @@ endif;?></textarea>
                                                                 <p class="help-text"><?php echo $language->translate("USERNAME");?></p>
 
                                                             </div>
-                                                            
+
                                                             <div class="form-group">
 
                                                                 <input type="password" class="form-control material input-sm" name="nzbgetPassword" placeholder="<?php echo $language->translate("PASSWORD");?>" autocorrect="off" autocapitalize="off" value="<?php echo NZBGETPASSWORD;?>">
@@ -1517,7 +1517,7 @@ endif;?></textarea>
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                         <div class="tab-pane big-box fade" id="tab-sabnzbd">
 
                                                             <div class="form-group">
@@ -1535,7 +1535,7 @@ endif;?></textarea>
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                         <div class="tab-pane big-box fade" id="tab-headphones">
 
                                                             <div class="form-group">
@@ -1553,14 +1553,14 @@ endif;?></textarea>
                                                             </div>
 
                                                         </div>
-                                                        
+
                                                         <div class="tab-pane big-box fade" id="tab-calendar">
 
                                                             <div class="content-form form-inline">
-                                                        
+
                                                                 <div class="form-group">
 
-                                                                <?php 
+                                                                <?php
 
                                                                 if(CALENDARSTART == "0") : $sundayActive = "selected"; else : $sundayActive = ""; endif;
                                                                 if(CALENDARSTART == "1") : $mondayActive = "selected"; else : $mondayActive = ""; endif;
@@ -1580,16 +1580,16 @@ endif;?></textarea>
                                                                         <option value="4" <?=$thursdayActive;?>><?php echo explosion($language->translate('DAYS'), 4);?></option>
                                                                         <option value="5" <?=$fridayActive;?>><?php echo explosion($language->translate('DAYS'), 5);?></option>
                                                                         <option value="6" <?=$saturdayActive;?>><?php echo explosion($language->translate('DAYS'), 6);?></option>
-                                                                        
+
                                                                     </select>
 
                                                                     <p class="help-text"><?php echo $language->translate("CALENDAR_START_DAY");?></p>
 
                                                                 </div>
-                                                                
+
                                                                 <div class="form-group">
 
-                                                                <?php 
+                                                                <?php
 
                                                                 if(CALENDARVIEW == "month") : $monthActive = "selected"; else : $monthActive = ""; endif;
                                                                 if(CALENDARVIEW == "basicDay") : $dayActive = "selected"; else : $dayActive = ""; endif;
@@ -1601,20 +1601,20 @@ endif;?></textarea>
                                                                         <option value="month" <?=$monthActive;?>><?php echo $language->translate('MONTH');?></option>
                                                                         <option value="basicDay" <?=$dayActive;?>><?php echo $language->translate('DAY');?></option>
                                                                         <option value="basicWeek" <?=$weekActive;?>><?php echo $language->translate('WEEK');?></option>
-                                                                        
+
                                                                     </select>
 
                                                                     <p class="help-text"><?php echo $language->translate("DEFAULT");?></p>
 
                                                                 </div>
-                                                                
+
                                                                 <div class="form-group">
 
                                                                 <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control material input-sm" name="calendarStartDay" placeholder="<?php echo $language->translate("CALENDAR_START_DATE");?>" autocorrect="off" autocapitalize="off" value="<?php echo CALENDARSTARTDAY;?>">
                                                                 <p class="help-text"><?php echo $language->translate("CALENDAR_START_DATE");?></p>
 
                                                                 </div>
-                                                                
+
                                                                 <div class="form-group">
 
                                                                 <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' class="form-control material input-sm" name="calendarEndDay" placeholder="<?php echo $language->translate("CALENDAR_END_DATE");?>" autocorrect="off" autocapitalize="off" value="<?php echo CALENDARENDDAY;?>">
@@ -1627,55 +1627,55 @@ endif;?></textarea>
                                                         </div>
 
                                                     </div>
-   
+
                                                 </div>
-                                                
+
                                                 <button type="submit" class="class='btn waves btn-labeled btn-success btn btn-sm pull-right text-uppercase waves-effect waves-float"><span class="btn-label"><i class="fa fa-floppy-o"></i></span>Save</button>
 
-                                            </form> 
-                                            
+                                            </form>
+
                                         </div>
-  
+
                                     </div>
 
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
-   
+
                 <div class="email-content advanced-box white-bg">
-                
+
                     <div class="email-body">
-                
+
                         <div class="email-header gray-bg">
-                 
+
                             <button type="button" class="btn btn-danger btn-sm waves close-button"><i class="fa fa-close"></i></button>
-                  
+
                             <h1>Advanced Settings</h1>
-                
+
                         </div>
-                
+
                         <div class="email-inner small-box">
-                  
+
                             <div class="email-inner-section">
-                                
+
                                 <div class="small-box fade in" id="systemSettings">
-                                    
+
                                     <div class="row">
-                                        
+
                                         <div class="col-lg-12">
-                                          
+
                                             <div class="small-box">
-                                            
+
                                                 <form class="content-form" name="systemSettings" id="systemSettings" action="" method="POST">
-                        								    
+
                                                     <input type="hidden" name="action" value="createLocation" />
-                                                    
+
                                                     <div class="tabbable tabs-with-bg" id="advanced-settings-tabs">
 
                                                         <ul class="nav nav-tabs apps">
@@ -1705,11 +1705,11 @@ endif;?></textarea>
                                                             </li>
 
                                                         </ul>
-                                                        
+
                                                         <div class="tab-content">
 
                                                             <div class="tab-pane big-box fade active in" id="tab-security">
-                                                                
+
                                                                 <div class="form-group">
                                                                     <select id="authType" name="authType" class="form-control material input-sm" required>
                                                                         <option value="internal" <?php echo (AUTHTYPE=='internal' || !AUTHTYPE?'selected':''); ?>>Organizr <?php echo $language->translate("ONLY"); ?></option>
@@ -1758,9 +1758,9 @@ endif;?></textarea>
                                                                         <p class="help-text"><?php echo $language->translate("PLEX_PASSWORD");?></p>
                                                                     </group>
                                                                 </div>
-                                                                
+
                                                                 <hr>
-                                                                
+
                                                                 <div class="form-group">
 
                                                                     <input type="text" class="form-control material input-sm" name="cookiePassword" placeholder="<?php echo $language->translate("COOKIE_PASSWORD");?>" value="<?php echo COOKIEPASSWORD;?>">
@@ -1781,9 +1781,9 @@ endif;?></textarea>
                                                                     <p class="help-text"><?php echo $language->translate("REGISTER_PASSWORD");?></p>
 
                                                                 </div>
-                                                                
+
                                                                 <div class="content-form form-inline">
-                                                    
+
                                                                     <div class="form-group">
                                                                         <?php  if(MULTIPLELOGIN == "true") : $multipleLogin = "checked"; else : $multipleLogin = ""; endif;?>
                                                                         <input id="" class="switcher switcher-success" value="false" name="multipleLogin" type="hidden">
@@ -1794,11 +1794,11 @@ endif;?></textarea>
                                                                     </div>
 
                                                                 </div>
-                                                                
+
                                                             </div>
-                                                            
+
                                                             <div class="tab-pane big-box fade" id="tab-more-settings">
-                                                                
+
                                                                 <div class="form-group">
 
                                                                     <input type="text" class="form-control material input-sm" name="database_Location" placeholder="<?php echo $language->translate("DATABASE_PATH");?>" autocorrect="off" autocapitalize="off" value="<?php echo DATABASE_LOCATION;?>">
@@ -1812,11 +1812,11 @@ endif;?></textarea>
                                                                     <p class="help-text"><?php echo $language->translate("SET_TIMEZONE");?></p>
 
                                                                 </div>
-                                                                
+
                                                             </div>
-                                                            
+
                                                             <div class="tab-pane big-box fade" id="tab-mail">
-                                                                
+
                                                                 <div class="form-group">
 
                                                                     <input type="text" class="form-control material input-sm" name="smtpHost" placeholder="<?php echo $language->translate("SMTP_HOST");?>" value="<?php echo SMTPHOST;?>">
@@ -1841,7 +1841,7 @@ endif;?></textarea>
                                                                     <p class="help-text"><?php echo $language->translate("SMTP_HOST_SENDER_EMAIL");?></p>
 
                                                                 </div>
-                                                                
+
                                                                 <div class="content-form form-inline">
 
                                                                     <div class="form-group">
@@ -1854,11 +1854,11 @@ endif;?></textarea>
                                                                     </div>
 
                                                                 </div>
-                                                                
+
                                                             </div>
-                                                            
+
                                                             <div class="tab-pane big-box fade" id="tab-more-custom">
-                                                                
+
                                                                 <div class="form-group">
 
                                                                     <input type="text" class="form-control material input-sm" name="titleLogo" placeholder="<?php echo $language->translate("LOGO_URL_TITLE");?>" value="<?php echo TITLELOGO;?>">
@@ -1872,12 +1872,12 @@ endif;?></textarea>
                                                                     <p class="help-text"><?php echo $language->translate("LOADING_ICON_URL");?></p>
 
                                                                 </div>
-                                                                
+
                                                                 <div class="content-form form-inline">
-                                                        
+
                                                                     <div class="form-group">
 
-                                                                    <?php 
+                                                                    <?php
 
                                                                     if($notifyExplode[1] == "slidetop") : $slidetopActive = "selected"; else : $slidetopActive = ""; endif;
                                                                     if($notifyExplode[1] == "exploader") : $exploaderActive = "selected"; else : $exploaderActive = ""; endif;
@@ -1913,7 +1913,7 @@ endif;?></textarea>
                                                                     </div>
 
                                                                 </div>
-                                                                
+
                                                                 <div class="content-form form-inline">
 
                                                                     <div class="form-group">
@@ -1944,64 +1944,64 @@ endif;?></textarea>
                                                                     </div>
 
                                                                 </div>
-                                                                
+
                                                             </div>
-                                                            
+
                                                         </div>
-                                                        
-                                                    </div>                                                    
-                                                    
+
+                                                    </div>
+
                                                     <button type="submit" class="class='btn waves btn-labeled btn-success btn btn-sm pull-right text-uppercase waves-effect waves-float"><span class="btn-label"><i class="fa fa-floppy-o"></i></span>Save</button>
 
-                                                </form>               
-                                          
+                                                </form>
+
                                             </div>
-                                        
+
                                         </div>
-                                      
+
                                     </div>
 
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
-    
+
                 <div class="email-content info-box white-bg">
-                
+
                     <div class="email-body">
-                
+
                         <div class="email-header gray-bg">
-                 
+
                             <button type="button" class="btn btn-danger btn-sm waves close-button"><i class="fa fa-close"></i></button>
-                  
+
                             <h1>About Organizr</h1>
-                
+
                         </div>
-                
+
                         <div class="email-inner small-box">
-                  
+
                             <div class="email-inner-section">
-                                
+
                                 <div class="small-box fade in" id="about">
-                        
+
                                     <h4><img src="images/organizr-logo-h-d.png" height="50px"></h4>
-                        
+
                                     <p id="version"></p>
-                                    
+
                                     <p id="submitFeedback">
-                                    
-                                        <a href='https://reddit.com/r/organizr' target='_blank' type='button' style="background: #AD80FD" class='btn waves btn-labeled btn-success btn text-uppercase waves-effect waves-float'><span class='btn-label'><i class='fa fa-reddit'></i></span>SUBREDDIT</a> 
-                                        <a href='https://github.com/causefx/Organizr/issues/new' target='_blank' type='button' class='btn waves btn-labeled btn-success btn text-uppercase waves-effect waves-float'><span class='btn-label'><i class='fa fa-github-alt'></i></span><?php echo $language->translate("SUBMIT_ISSUE");?></a> 
+
+                                        <a href='https://reddit.com/r/organizr' target='_blank' type='button' style="background: #AD80FD" class='btn waves btn-labeled btn-success btn text-uppercase waves-effect waves-float'><span class='btn-label'><i class='fa fa-reddit'></i></span>SUBREDDIT</a>
+                                        <a href='https://github.com/causefx/Organizr/issues/new' target='_blank' type='button' class='btn waves btn-labeled btn-success btn text-uppercase waves-effect waves-float'><span class='btn-label'><i class='fa fa-github-alt'></i></span><?php echo $language->translate("SUBMIT_ISSUE");?></a>
                                         <a href='https://github.com/causefx/Organizr' target='_blank' type='button' class='btn waves btn-labeled btn-primary btn text-uppercase waves-effect waves-float'><span class='btn-label'><i class='fa fa-github'></i></span><?php echo $language->translate("VIEW_ON_GITHUB");?></a>
                                         <a href='https://gitter.im/Organizrr/Lobby' target='_blank' type='button' class='btn waves btn-labeled btn-dark btn text-uppercase waves-effect waves-float'><span class='btn-label'><i class='fa fa-comments-o'></i></span><?php echo $language->translate("CHAT_WITH_US");?></a>
                                         <button type="button" class="class='btn waves btn-labeled btn-warning btn text-uppercase waves-effect waves-float" data-toggle="modal" data-target=".Help-Me-modal-lg"><span class='btn-label'><i class='fa fa-life-ring'></i></span><?php echo $language->translate("HELP");?></button>
                                         <button id="deleteToggle" type="button" class="class='btn waves btn-labeled btn-danger btn text-uppercase waves-effect waves-float" ><span class='btn-label'><i class='fa fa-trash'></i></span><?php echo $language->translate("DELETE_DATABASE");?></button>
-                                        
+
                                     </p>
 
                                     <div class="modal fade Help-Me-modal-lg" tabindex="-1" role="dialog">
@@ -2048,7 +2048,7 @@ endif;?></textarea>
                                                                         <li><strong><?php echo $language->translate("ACTIVE");?></strong> <?php echo $language->translate("ACTIVE_ABOUT");?></li>
                                                                         <li><strong><?php echo $language->translate("USER");?></strong> <?php echo $language->translate("USER_ABOUT");?></li>
                                                                         <li><strong><?php echo $language->translate("GUEST");?></strong> <?php echo $language->translate("GUEST_ABOUT");?></li>
-                                                                        <li><strong><?php echo $language->translate("NO_IFRAME");?></strong> <?php echo $language->translate("NO_IFRAME_ABOUT");?></li>        
+                                                                        <li><strong><?php echo $language->translate("NO_IFRAME");?></strong> <?php echo $language->translate("NO_IFRAME_ABOUT");?></li>
 
                                                                     </ul>
 
@@ -2170,7 +2170,7 @@ endif;?></textarea>
 
                                                                     <p><?php echo $language->translate("TAB_NOT_LOADING_ABOUT");?></p>
 
-                                                                    <?php 
+                                                                    <?php
                                                                     if(get_browser_name() == "Chrome") : echo get_browser_name() . ": <a href='https://chrome.google.com/webstore/detail/ignore-x-frame-headers/gleekbfjekiniecknbkamfmkohkpodhe' target='_blank'><strong>Ignore X-Frame headers</strong> by Guillaume Ryder</a>";
                                                                     elseif(get_browser_name() == "Firefox") : echo get_browser_name() . ": <a href='https://addons.mozilla.org/en-us/firefox/addon/ignore-x-frame-options/' target='_blank'><strong>Ignore X-Frame headers</strong> by rjhoukema</a>";
                                                                     else : echo "Sorry, currently there is no other alternative for " . get_browser_name(); endif;
@@ -2245,109 +2245,109 @@ endif;?></textarea>
                                         </div>
 
                                     </div>
-                                    
+
                                     <p id="whatsnew"></p>
-                                    
+
                                     <p id="downloadnow"></p>
-                                    
+
                                     <div id="deleteDiv" style="display: none;" class="panel panel-danger">
-                                        
+
                                         <div class="panel-heading">
-                                            
+
                                             <h3 class="panel-title"><?php echo $language->translate("DELETE_DATABASE");?></h3>
-                                            
+
                                         </div>
-                                        
+
                                         <div class="panel-body">
-                                            
+
                                             <div class="">
-                                            
+
                                                 <p><?php echo $language->translate("DELETE_WARNING");?></p>
                                                 <form id="deletedb" method="post">
-                                                    
+
                                                     <input type="hidden" name="action" value="deleteDB" />
                                                     <button class="btn waves btn-labeled btn-danger pull-right text-uppercase waves-effect waves-float" type="submit">
-                                                
+
                                                         <span class="btn-label"><i class="fa fa-trash"></i></span><?php echo $language->translate("DELETE_DATABASE");?>
-                                                
+
                                                     </button>
-                                                    
+
                                                 </form>
-                                        
+
                                             </div>
-                                            
+
                                         </div>
-                                        
+
                                     </div>
-                                
+
                                     <div class="timeline-container">
-                                        
+
                                         <div class="row">
-                                            
+
                                             <div class="col-lg-12">
-                                                
+
                                                 <ul class="cbp_tmtimeline" id="versionHistory">
-                                                    
+
                                                 </ul>
-                                                
+
                                                 <div class="btn-group-sm btn-group btn-group-justified">
-                                                    
+
                                                     <div id="loadMore" class="btn-group" role="group">
-                                                    
+
                                                         <button type="button" class="btn waves btn-primary waves-effect waves-float text-uppercase"><?php echo $language->translate("SHOW_MORE");?></button>
-                                                    
+
                                                     </div>
-                                                    
+
                                                     <div id="showLess" class="btn-group" role="group">
-                                                        
+
                                                         <button type="button" class="btn waves btn-warning waves-effect waves-float text-uppercase"><?php echo $language->translate("SHOW_LESS");?></button>
-                                                        
+
                                                     </div>
-                                                    
+
                                                 </div>
-                                                
+
                                             </div>
-                                            
+
                                         </div>
-                                        
+
                                     </div>
-                      
+
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
 
                 <div class="email-content users-box white-bg">
-                
+
                     <div class="email-body">
-                
+
                         <div class="email-header gray-bg">
-                 
+
                             <button type="button" class="btn btn-danger btn-sm waves close-button"><i class="fa fa-close"></i></button>
-                  
+
                             <h1>Users Management</h1>
-                
+
                         </div>
-                
+
                         <div class="email-inner small-box">
-                  
+
                             <div class="email-inner-section">
-                                
+
                                 <div class="small-box fade in" id="useredit">
-                                    
+
                                     <div class="row">
-                                        
+
                                         <div class="col-lg-12">
-                                          
+
                                             <div class="small-box">
-                                            
+
                                                 <form class="content-form form-inline" name="new user registration" id="registration" action="" method="POST">
-                        								    
+
                                                     <input type="hidden" name="op" value="register"/>
                                                     <input type="hidden" name="sha1" value=""/>
                                                     <input type="hidden" name="settings" value="true"/>
@@ -2375,27 +2375,27 @@ endif;?></textarea>
                                                         <input type="password" class="form-control material" name="password2" placeholder="<?php echo $language->translate("PASSWORD_AGAIN");?>">
 
                                                     </div>
-                                                    
+
                                                     <button type="submit" onclick="User.processRegistration()" class="btn waves btn-labeled btn-primary btn btn-sm text-uppercase waves-effect waves-float promoteUser">
 
                                                         <span class="btn-label"><i class="fa fa-user-plus"></i></span><?php echo $language->translate("CREATE_USER");?>
 
                                                     </button>
 
-                                                </form>               
-                                          
+                                                </form>
+
                                             </div>
-                                        
+
                                         </div>
-                                      
+
                                     </div>
-                                    
+
                                     <div class="small-box">
-                                        
+
                                         <form class="content-form form-inline" name="unregister" id="unregister" action="" method="POST">
-                                              
-                                            
-                                            
+
+
+
                                             <p id="inputUsername"></p>
 
                                             <div class="table-responsive">
@@ -2409,7 +2409,7 @@ endif;?></textarea>
                                                             <th>#</th>
 
                                                             <th><?php echo $language->translate("USERNAME");?></th>
-                                                            
+
                                                             <th><?php echo $language->translate("EMAIL");?></th>
 
                                                             <th><?php echo $language->translate("LOGIN_STATUS");?></th>
@@ -2426,24 +2426,24 @@ endif;?></textarea>
 
                                                     <tbody>
 
-                                                        <?php $countUsers = 1; 
-                                                        foreach($gotUsers as $row) : 
-                                                        if($row['role'] == "admin" && $countUsers == 1) : 
+                                                        <?php $countUsers = 1;
+                                                        foreach($gotUsers as $row) :
+                                                        if($row['role'] == "admin" && $countUsers == 1) :
                                                             $userColor = "red";
                                                             $disableAction = "disabled=\"disabled\"";
-                                                        else : 
+                                                        else :
                                                             $userColor = "blue";
                                                             $disableAction = "";
                                                         endif;
-                                                        if($row['active'] == "true") : 
+                                                        if($row['active'] == "true") :
                                                             $userActive = $language->translate("LOGGED_IN");
                                                             $userActiveColor = "primary";
-                                                        else : 
+                                                        else :
                                                             $userActive = $language->translate("LOGGED_OUT");
                                                             $userActiveColor = "danger";
                                                         endif;
                                                         $userpic = md5( strtolower( trim( $row['email'] ) ) );
-                                                        if(!empty($row["last"])) : 
+                                                        if(!empty($row["last"])) :
                                                            $lastActive = date("Y-m-d H:i", intval($row["last"]));
                                                         else :
                                                             $lastActive = "";
@@ -2455,7 +2455,7 @@ endif;?></textarea>
                                                             <th scope="row"><?=$countUsers;?></th>
 
                                                             <td><?php if(GRAVATAR == "true") : ?><i class="userpic"><img src="https://www.gravatar.com/avatar/<?=$userpic;?>?s=25&d=mm" class="img-circle"></i> &nbsp; <?php endif; ?><?=$row['username'];?></td>
-                                                            
+
                                                             <td><?=$row['email'];?></td>
 
                                                             <td><span class="label label-<?=$userActiveColor;?>"><?=$userActive;?></span></td>
@@ -2471,25 +2471,25 @@ endif;?></textarea>
                                                                     <span class="btn-label"><i class="fa fa-user-times"></i></span><?php echo $language->translate("DELETE");?>
 
                                                                 </button>
-                                                                
+
                                                                 <?php if ($row['role'] == "user") : ?>
-                                                                
+
                                                                 <button class="btn waves btn-labeled btn-success btn btn-sm text-uppercase waves-effect waves-float promoteUser">
 
                                                                     <span class="btn-label"><i class="fa fa-arrow-up"></i></span><?php echo $language->translate("PROMOTE");?>
 
                                                                 </button>
-                                                                
+
                                                                 <?php endif; ?>
-                                                                
+
                                                                 <?php if ($row['role'] == "admin") : ?>
-                                                                
+
                                                                 <button <?=$disableAction;?> class="btn waves btn-labeled btn-warning btn btn-sm text-uppercase waves-effect waves-float demoteUser">
 
                                                                     <span class="btn-label"><i class="fa fa-arrow-down"></i></span><?php echo $language->translate("DEMOTE");?>
 
                                                                 </button>
-                                                                
+
                                                                 <?php endif; ?>
 
                                                             </td>
@@ -2503,37 +2503,37 @@ endif;?></textarea>
                                                 </table>
 
                                             </div>
-                                            
+
                                         </form>
-                                        
+
                                     </div>
 
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
-                
+
                 <div class="email-content logs-box white-bg">
-                
+
                     <div class="email-body">
-                
+
                         <div class="email-header gray-bg">
-                 
+
                             <button type="button" class="btn btn-danger btn-sm waves close-button"><i class="fa fa-close"></i></button>
-                  
+
                             <h1>Logs</h1>
-                
+
                         </div>
-                
+
                         <div class="email-inner small-box">
-                  
+
                             <div class="email-inner-section">
-                                
+
                                 <div class="small-box" id="loginlog">
 
                                     <div class="table-responsive">
@@ -2619,7 +2619,7 @@ endif;?></textarea>
 
                                                     }
 
-                                                    foreach (array_reverse($gotFailLog["auth"]) as $key => $val) : 
+                                                    foreach (array_reverse($gotFailLog["auth"]) as $key => $val) :
 
                                                     if($val["auth_type"] == "bad_auth") : $badLogin++; elseif($val["auth_type"] == "good_auth") : $goodLogin++; endif;
                                                 ?>
@@ -2636,14 +2636,14 @@ endif;?></textarea>
 
                                                 </tr>
 
-                                                <?php endforeach; ?> 
+                                                <?php endforeach; ?>
 
                                             </tbody>
 
                                         </table>
 
-                                        <?php 
-                                        $totalLogin = $goodLogin + $badLogin;     
+                                        <?php
+                                        $totalLogin = $goodLogin + $badLogin;
                                         $goodPercent = round(($goodLogin / $totalLogin) * 100);
                                         $badPercent = round(($badLogin / $totalLogin) * 100);
 
@@ -2660,15 +2660,15 @@ endif;?></textarea>
                                     </div>
 
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
-            
+
             </div>
             <!--End Content-->
 
@@ -2693,7 +2693,7 @@ endif;?></textarea>
         <!--Selects-->
         <script src="js/selects/selectFx.js"></script>
         <script src="js/jscolor.js"></script>
-        
+
         <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
 
         <script src="bower_components/smoke/dist/js/smoke.min.js"></script>
@@ -2707,7 +2707,7 @@ endif;?></textarea>
         <script src="js/jquery.filer.min.js" type="text/javascript"></script>
 	    <script src="js/custom.js?v=<?php echo INSTALLEDVERSION; ?>" type="text/javascript"></script>
 	    <script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
-        
+
         <!--Data Tables-->
         <script src="bower_components/DataTables/media/js/jquery.dataTables.js"></script>
         <script src="bower_components/datatables.net-responsive/js/dataTables.responsive.js"></script>
@@ -2738,103 +2738,103 @@ endif;?></textarea>
                 });
             });
         </script>
-        
+
         <?php if($_POST['op']) : ?>
         <script>
-            
+
             parent.notify("<?php echo printArray($USER->info_log); ?>","info-circle","notice","5000", "<?=$notifyExplode[0];?>", "<?=$notifyExplode[1];?>");
-            
+
             <?php if(!empty($USER->error_log)) : ?>
-            
+
             parent.notify("<?php echo printArray($USER->error_log); ?>","exclamation-circle ","error","5000", "<?=$notifyExplode[0];?>", "<?=$notifyExplode[1];?>");
-            
+
             <?php endif; ?>
-            
+
         </script>
         <?php endif; ?>
-        
+
         <?php if($action == "addTabz") : ?>
         <script>
 
             if(!window.location.hash) {
-                
+
                 window.location = window.location + '#loaded';
                 window.location.reload();
-                
+
             }else{
-                
-               parent.notify("<strong><?php echo $language->translate('TABS_SAVED');?></strong> <?php echo $language->translate('APPLY_RELOAD');?>","floppy-o","success","5000", "<?=$notifyExplode[0];?>", "<?=$notifyExplode[1];?>"); 
-                
+
+               parent.notify("<strong><?php echo $language->translate('TABS_SAVED');?></strong> <?php echo $language->translate('APPLY_RELOAD');?>","floppy-o","success","5000", "<?=$notifyExplode[0];?>", "<?=$notifyExplode[1];?>");
+
             }
-            
+
         </script>
         <?php endif; ?>
-        
+
          <?php if($action == "addOptionz") : ?>
         <script>
 
             parent.notify("<strong><?php echo $language->translate('COLORS_SAVED');?></strong> <?php echo $language->translate('APPLY_RELOAD');?>","floppy-o","success","5000", "<?=$notifyExplode[0];?>", "<?=$notifyExplode[1];?>");
-            
+
         </script>
         <?php endif; ?>
 
         <script>
-            
+
             (function($) {
-            
+
                 function startTrigger(e,data) {
-            
+
                     var $elem = $(this);
-            
+
                     $elem.data('mouseheld_timeout', setTimeout(function() {
-            
+
                         $elem.trigger('mouseheld');
-            
+
                     }, e.data));
                 }
 
                 function stopTrigger() {
-                
+
                     var $elem = $(this);
-                
+
                     clearTimeout($elem.data('mouseheld_timeout'));
                 }
 
                 var mouseheld = $.event.special.mouseheld = {
-                
+
                     setup: function(data) {
-                
+
                         var $this = $(this);
-                
+
                         $this.bind('mousedown', +data || mouseheld.time, startTrigger);
-                
+
                         $this.bind('mouseleave mouseup', stopTrigger);
-                
+
                     },
-                
+
                     teardown: function() {
-                
+
                         var $this = $(this);
-                
+
                         $this.unbind('mousedown', startTrigger);
-                
+
                         $this.unbind('mouseleave mouseup', stopTrigger);
-                
+
                     },
-                
+
                     time: 200 // default to 750ms
-                
+
                 };
-                
+
             })(jQuery);
 
             $(function () {
 
                 //$(".todo ul").sortable();
                 $(".todo ul").sortable({
-                    
+
                     'opacity': 0.9,
-                    
+
                 });
 
                 $("#add_tab").on('submit', function (e) {
@@ -2892,7 +2892,7 @@ endif;?></textarea>
                         e.preventDefault();
                         count();
                     }, 800);
-                    
+
 
                 });
 
@@ -2938,18 +2938,18 @@ endif;?></textarea>
         </script>
 
         <script>
-            
+
             function rememberTabSelection(tabPaneSelector, useHash) {
-            
+
                 var key = 'selectedTabFor' + tabPaneSelector;
 
-                if(get(key)) 
+                if(get(key))
 
                 $(tabPaneSelector).find('a[href=' + get(key) + ']').tab('show');
 
                 $(tabPaneSelector).on("click", 'a[data-toggle]', function(event) {
                     set(key, this.getAttribute('href'));
-                }); 
+                });
 
                 function get(key) {
 
@@ -2968,85 +2968,85 @@ endif;?></textarea>
                         localStorage.setItem(key, value);
                 }
             }
-            
+
             $("#notifyTest").click(function(){
 
                 var notifySplit = $("#notifyValue").val().split("-");
                 console.log(notifySplit[0]);
                 parent.notify("<?php echo $language->translate('TEST_MESSAGE');?>","flask","notice","5000", notifySplit[0], notifySplit[1]);
-     
+
             });
-            
+
             $("#iconHide").click(function(){
 
                 $( "div[class^='jFiler jFiler-theme-dragdropbox']" ).toggle();
-     
+
             });
-            
+
             $("#iconAll").click(function(){
 
                 $( "div[id^='viewAllIcons']" ).toggle();
-     
+
             });
-            
+
             $("#deleteToggle").click(function(){
 
                 $( "#deleteDiv" ).toggle();
-     
+
             });
-            
+
             $("#editCssButton").click(function(){
 
                 $( "#add_optionz" ).toggle();
                 $( "#editCssForm" ).toggle();
-     
+
             });
-            
+
             $("#backToThemeButton").click(function(){
 
                 $( "#add_optionz" ).toggle();
                 $( "#editCssForm" ).toggle();
-     
+
             });
-            
+
             $(".deleteUser").click(function(){
 
                 var parent_id = $(this).parent().attr('id');
                 editUsername = $('#unregister').find('#inputUsername');
                 $(editUsername).html('<input type="hidden" name="op" value="unregister"/><input type="hidden" name="username"value="' + parent_id + '" />');
-     
+
             });
-            
+
             $(".promoteUser").click(function(){
 
                 var parent_ids = $(this).parent().attr('id');
                 editUsername = $('#unregister').find('#inputUsername');
                 $(editUsername).html('<input type="hidden" name="op" value="update"/><input type="hidden" name="role" value="admin"/><input type="hidden" name="username"value="' + parent_ids + '" />');
-     
+
             });
-            
+
             $(".demoteUser").click(function(){
 
                 var parent_idz = $(this).parent().attr('id');
                 editUsername = $('#unregister').find('#inputUsername');
                 $(editUsername).html('<input type="hidden" name="op" value="update"/><input type="hidden" name="role" value="user"/><input type="hidden" name="username"value="' + parent_idz + '" />');
-     
+
             });
-            
+
             $('#showLess').hide();
-            
+
             $('#loadMore').click(function () {
-                            
+
                 x= (x+5 <= size_li) ? x+5 : size_li;
 
                 $('#versionHistory li:lt('+x+')').show();
-                
+
                 $('#showLess').show();
-                
+
                 if(x == size_li){
-                    
+
                     $('#loadMore').hide();
-                    
+
                 }
 
             });
@@ -3054,15 +3054,15 @@ endif;?></textarea>
             $('#showLess').click(function () {
 
                 $('#versionHistory li').not(':lt(2)').hide();
-                
+
                 $('#loadMore').show();
-                    
+
                 $('#showLess').hide();
 
             });
-            
+
             $('.icp-auto').iconpicker({placement: 'left', hideOnSelect: false, collision: true});
-            
+
             $("li[class^='list-group-item']").bind('mouseheld', function(e) {
 
                 $(this).find("span[class^='fa fa-hand-paper-o']").attr("class", "fa fa-hand-grab-o");
@@ -3074,7 +3074,7 @@ endif;?></textarea>
                     $(this).find("div[class^='action-btns tabIconView']").removeClass("animated swing");
                 });
             });
-            
+
             function copyToClipboard(elem) {
                   // create hidden text element, if it doesn't already exist
                 var targetId = "_hiddenCopyText_";
@@ -3124,44 +3124,44 @@ endif;?></textarea>
                 }
                 return succeed;
             }
-            
+
             $("img[class^='allIcons']").click(function(){
 
                 $("textarea[id^='copyTarget']").val($(this).attr("src"));
 
                 copyToClipboard(document.getElementById("copyTarget"));
-                
+
                 parent.notify("<?php echo $language->translate('ICON_COPY');?>","clipboard","success","5000", "<?=$notifyExplode[0];?>", "<?=$notifyExplode[1];?>");
-                
+
                 $( "div[id^='viewAllIcons']" ).toggle();
-                
+
             });
-            
+
             $('body').on('click', 'b.allIcons', function() {
 
                 $("textarea[id^='copyTarget2']").val($(this).attr("title"));
 
                 copyToClipboard(document.getElementById("copyTarget2"));
-                
+
                 parent.notify("<?php echo $language->translate('ICON_COPY');?>","clipboard","success","5000", "<?=$notifyExplode[0];?>", "<?=$notifyExplode[1];?>");
-                
+
                 $( "div[class^='jFiler jFiler-theme-dragdropbox']" ).hide();
-                
+
             });
-         
+
         </script>
-        
+
         <script>
-            
-            //Custom Themes            
+
+            //Custom Themes
             function changeColor(elementName, elementColor) {
-                
+
                 var definedElement = document.getElementById(elementName);
-                
+
                 definedElement.focus();
                 definedElement.value = elementColor;
                 definedElement.style.backgroundColor = elementColor;
-                
+
             }
 
             $('#plexTheme').on('click touchstart', function(){
@@ -3178,9 +3178,9 @@ endif;?></textarea>
                 changeColor("inactivetext", "#B8B8B8");
                 changeColor("loading", "#E49F0C");
                 changeColor("hovertext", "#000000");
-                
+
             });
-            
+
             $('#embyTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#52B54B");
@@ -3195,9 +3195,9 @@ endif;?></textarea>
                 changeColor("inactivetext", "#B8B8B8");
                 changeColor("loading", "#52B54B");
                 changeColor("hovertext", "#000000");
-                
+
             });
-            
+
             $('#bookTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#FFFFFF");
@@ -3212,9 +3212,9 @@ endif;?></textarea>
                 changeColor("inactivetext", "#DFE3EE");
                 changeColor("loading", "#FFFFFF");
                 changeColor("hovertext", "#000000");
-                
+
             });
-            
+
             $('#spaTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#5B391E");
@@ -3229,9 +3229,9 @@ endif;?></textarea>
                 changeColor("inactivetext", "#5B391E");
                 changeColor("loading", "#5B391E");
                 changeColor("hovertext", "#000000");
-                
+
             });
-            
+
             $('#darklyTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#FFFFFF");
@@ -3246,9 +3246,9 @@ endif;?></textarea>
                 changeColor("inactivetext", "#0CE3AC");
                 changeColor("loading", "#FFFFFF");
                 changeColor("hovertext", "#000000");
-                
+
             });
-            
+
             $('#slateTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#C8C8C8");
@@ -3263,9 +3263,9 @@ endif;?></textarea>
                 changeColor("inactivetext", "#C8C8C8");
                 changeColor("loading", "#C8C8C8");
                 changeColor("hovertext", "#000000");
-                
+
             });
-            
+
             $('#defaultTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#FFFFFF");
@@ -3280,9 +3280,9 @@ endif;?></textarea>
                 changeColor("inactivetext", "#FFFFFF");
                 changeColor("loading", "#FFFFFF");
                 changeColor("hovertext", "#000000");
-                
+
             });
-            
+
             $('#redTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#FFFFFF");
@@ -3297,9 +3297,9 @@ endif;?></textarea>
                 changeColor("inactivetext", "#FFFFFF");
                 changeColor("loading", "#FFFFFF");
                 changeColor("hovertext", "#000000");
-                
+
             });
-            
+
             $('#monokaiTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#66D9EF");
@@ -3314,9 +3314,9 @@ endif;?></textarea>
                 changeColor("inactivetext", "#66D9EF");
                 changeColor("loading", "#66D9EF");
                 changeColor("hovertext", "#000000");
-                
+
             });
-            
+
             $('#thejokerTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#CCCCCC");
@@ -3333,7 +3333,7 @@ endif;?></textarea>
                 changeColor("hovertext", "#000000");
 
             });
-            
+
             $('#newPlexTheme').on('click touchstart', function(){
 
                 changeColor("topbartext", "#E5A00D");
@@ -3350,7 +3350,7 @@ endif;?></textarea>
                 changeColor("hovertext", "#E0E3E6");
 
             });
-            
+
             $('textarea').numberedtextarea({
 
               // font color for line numbers
@@ -3360,19 +3360,19 @@ endif;?></textarea>
               borderColor: 'null',
 
               // CSS class to be added to the line numbers
-              class: null, 
+              class: null,
 
               // if true Tab key creates indentation
-              allowTabChar: true,       
+              allowTabChar: true,
 
             });
-            
+
             $(".email-header .close-button").click(function () {
                 $(".email-content").removeClass("email-active");
                 $('html').removeClass("overhid");
                 $("#settings-list").find("li").removeClass("active");
             });
-            
+
              $(document).mouseup(function (e)
 {
                 var container = $(".email-content");
@@ -3382,9 +3382,9 @@ endif;?></textarea>
                     $('html').removeClass("overhid");
                     $("#settings-list").find("li").removeClass("active");
                 }
-                
-            }); 
-            
+
+            });
+
             $( document ).on( 'keydown', function ( e ) {
                 if ( e.keyCode === 27 ) { // ESC
                     var container = $(".email-content");
@@ -3398,10 +3398,10 @@ endif;?></textarea>
             });
 
             $("#open-tabs").on("click",function (e) {
-                
+
                 $(".email-content").removeClass("email-active");
                 $('html').removeClass("overhid");
-                                
+
                 if($(window).width() < 768){
                     $('html').addClass("overhid");
                 }
@@ -3417,17 +3417,17 @@ endif;?></textarea>
                     deletedMailBox = refreshMailPreloader.fadeOut(300, function(){
                     refreshMailPreloader.remove();
                 });
-            
+
                 },600);
-            
+
                 e.preventDefault();
             });
-            
+
             $("#open-colors").on("click",function (e) {
-                
+
                 $(".email-content").removeClass("email-active");
                 $('html').removeClass("overhid");
-                                
+
                 if($(window).width() < 768){
                     $('html').addClass("overhid");
                 }
@@ -3443,17 +3443,17 @@ endif;?></textarea>
                     deletedMailBox = refreshMailPreloader.fadeOut(300, function(){
                     refreshMailPreloader.remove();
                 });
-            
+
                 },600);
-            
+
                 e.preventDefault();
             });
-            
+
             $("#open-homepage").on("click",function (e) {
-                
+
                 $(".email-content").removeClass("email-active");
                 $('html').removeClass("overhid");
-                
+
                 if($(window).width() < 768){
                     $('html').addClass("overhid");
                 }
@@ -3469,17 +3469,17 @@ endif;?></textarea>
                     deletedMailBox = refreshMailPreloader.fadeOut(300, function(){
                     refreshMailPreloader.remove();
                 });
-            
+
                 },600);
-            
+
                 e.preventDefault();
             });
-            
+
             $("#open-advanced").on("click",function (e) {
-                
+
                 $(".email-content").removeClass("email-active");
                 $('html').removeClass("overhid");
-                
+
                 if($(window).width() < 768){
                     $('html').addClass("overhid");
                 }
@@ -3495,17 +3495,17 @@ endif;?></textarea>
                     deletedMailBox = refreshMailPreloader.fadeOut(300, function(){
                     refreshMailPreloader.remove();
                 });
-            
+
                 },600);
-            
+
                 e.preventDefault();
             });
-            
+
             $("#open-info").on("click",function (e) {
-                
+
                 $(".email-content").removeClass("email-active");
                 $('html').removeClass("overhid");
-                
+
                 if($(window).width() < 768){
                     $('html').addClass("overhid");
                 }
@@ -3521,17 +3521,17 @@ endif;?></textarea>
                     deletedMailBox = refreshMailPreloader.fadeOut(300, function(){
                     refreshMailPreloader.remove();
                 });
-            
+
                 },600);
-            
+
                 e.preventDefault();
             });
-            
+
             $("#open-users").on("click",function (e) {
-                
+
                 $(".email-content").removeClass("email-active");
                 $('html').removeClass("overhid");
-                
+
                 if($(window).width() < 768){
                     $('html').addClass("overhid");
                 }
@@ -3547,17 +3547,17 @@ endif;?></textarea>
                     deletedMailBox = refreshMailPreloader.fadeOut(300, function(){
                     refreshMailPreloader.remove();
                 });
-            
+
                 },600);
-            
+
                 e.preventDefault();
             });
-            
+
             $("#open-logs").on("click",function (e) {
-                
+
                 $(".email-content").removeClass("email-active");
                 $('html').removeClass("overhid");
-                
+
                 if($(window).width() < 768){
                     $('html').addClass("overhid");
                 }
@@ -3573,16 +3573,16 @@ endif;?></textarea>
                     deletedMailBox = refreshMailPreloader.fadeOut(300, function(){
                     refreshMailPreloader.remove();
                 });
-            
+
                 },600);
-            
+
                 e.preventDefault();
             });
-        
+
         </script>
-        
+
         <script>
-        
+
         $( document ).ready(function() {
             //Hide Icon box on load
             $( "div[class^='jFiler jFiler-theme-dragdropbox']" ).hide();
@@ -3596,7 +3596,7 @@ endif;?></textarea>
             //Stop Div behind From Scrolling
             $( '.email-content' ).on( 'mousewheel', function ( e ) {
                 e.preventDefault();
-            }, false);  
+            }, false);
             //Set Hide Function
             var authTypeFunc = function() {
                 // Hide Everything
@@ -3621,76 +3621,76 @@ endif;?></textarea>
             $('#authType, #authBackend').on('change', authTypeFunc);
             //Hide Settings on Load
             authTypeFunc();
-            //Simulate Edit Tabs Click 
+            //Simulate Edit Tabs Click
             $("#open-tabs").trigger("click");
             //Append Delete log to User Logs
             $("div[class^='DTTT_container']").append('<form style="display: inline; margin-left: 3px;" id="deletelog" method="post"><input type="hidden" name="action" value="deleteLog" /><button class="btn waves btn-labeled btn-danger text-uppercase waves-effect waves-float" type="submit"><span class="btn-label"><i class="fa fa-trash"></i></span><?php echo $language->translate("PURGE_LOG");?> </button></form>')
             $("a[id^='ToolTables_datatable_0'] span").html('<?php echo $language->translate("PRINT");?>')
             //Enable Tooltips
-            $('[data-toggle="tooltip"]').tooltip(); 
+            $('[data-toggle="tooltip"]').tooltip();
             //Tab save on reload - might need to delete as we changed tab layout
-            //rememberTabSelection('#settingsTabs', !localStorage); 
-        	//AJAX call to github to get version info	
+            //rememberTabSelection('#settingsTabs', !localStorage);
+        	//AJAX call to github to get version info
         	$.ajax({
-        				
+
         		type: "GET",
                 url: "https://api.github.com/repos/causefx/Organizr/releases",
                 dataType: "json",
                 success: function(github) {
-                    
+
                     var currentVersion = "<?php echo INSTALLEDVERSION;?>";
-                   
+
                     infoTabVersion = $('#about').find('#version');
                     infoTabVersionHistory = $('#about').find('#versionHistory');
                     infoTabNew = $('#about').find('#whatsnew');
                     infoTabDownload = $('#about').find('#downloadnow');
-                   
+
                     $.each(github, function(i,v) {
-                        if(i === 0){ 
-                            
+                        if(i === 0){
+
                             console.log(v.tag_name);
                             githubVersion = v.tag_name;
                             githubDescription = v.body;
                             githubName = v.name;
-                                   
+
                         }
-                        
+
                         $(infoTabVersionHistory).append('<li style="display: none"><time class="cbp_tmtime" datetime="' + v.published_at + '"><span>' + v.published_at.substring(0,10) + '</span> <span>' + v.tag_name + '</span></time><div class="cbp_tmicon animated jello"><i class="fa fa-github-alt"></i></div><div class="cbp_tmlabel"><h2 class="text-uppercase">' + v.name + '</h2><p>' + v.body + '</p></div></li>');
-                        
+
                         size_li = $("#versionHistory li").size();
-                        
+
                         x=2;
-                        
+
                         $('#versionHistory li:lt('+x+')').show();
-                                                
+
                     });
-                            
+
         			if(currentVersion < githubVersion){
-                    
+
                     	console.log("You Need To Upgrade");
-                        
+
                         parent.notify("<strong><?php echo $language->translate("NEW_VERSION");?></strong> <?php echo $language->translate("CLICK_INFO");?>","arrow-circle-o-down","warning","50000", "<?=$notifyExplode[0];?>", "<?=$notifyExplode[1];?>");
 
                         $(infoTabNew).html("<br/><h4><strong><?php echo $language->translate("WHATS_NEW");?> " + githubVersion + "</strong></h4><strong><?php echo $language->translate("TITLE");?>: </strong>" + githubName + " <br/><strong><?php echo $language->translate("CHANGES");?>: </strong>" + githubDescription);
-                        
+
                         $(infoTabDownload).html("<br/><form style=\"display:initial;\" id=\"deletedb\" method=\"post\"><input type=\"hidden\" name=\"action\" value=\"upgrade\" /><button class=\"btn waves btn-labeled btn-success text-uppercase waves-effect waves-float\" type=\"submit\"><span class=\"btn-label\"><i class=\"fa fa-refresh\"></i></span><?php echo $language->translate("AUTO_UPGRADE");?></button></form> <a href='https://github.com/causefx/Organizr/archive/master.zip' target='_blank' type='button' class='btn waves btn-labeled btn-success text-uppercase waves-effect waves-float'><span class='btn-label'><i class='fa fa-download'></i></span>Organizr v." + githubVersion + "</a>");
-                        
+
                         $( "p[id^='upgrade']" ).toggle();
-                    
+
                     }else if(currentVersion === githubVersion){
-                    
+
                     	console.log("You Are on Current Version");
-                    
+
                     }else{
-                    
+
                     	console.log("something went wrong");
-                    
+
                     }
 
                     $(infoTabVersion).html("<strong><?php echo $language->translate("INSTALLED_VERSION");?>: </strong>" + currentVersion + " <strong><?php echo $language->translate("CURRENT_VERSION");?>: </strong>" + githubVersion + " <strong><?php echo $language->translate("DATABASE_PATH");?>:  </strong> <?php echo htmlentities(DATABASE_LOCATION);?>");
-                                        
+
                 }
-                
+
             });
             //Edit Info tab with Github info
             <?php if(file_exists(FAIL_LOG)) : ?>
@@ -3700,18 +3700,18 @@ endif;?></textarea>
             badCount = $('#loginStats').find('#badCount');
             badPercent = $('#loginStats').find('#badPercent');
             badTitle = $('#loginStats').find('#badTitle');
-            $(goodCount).html("<?php echo $goodLogin;?>");            
-            $(goodTitle).html("<?php echo $goodPercent;?>%");            
-            $(goodPercent).attr('aria-valuenow', "<?php echo $goodPercent;?>");            
-            $(goodPercent).attr('style', "width: <?php echo $goodPercent;?>%");            
+            $(goodCount).html("<?php echo $goodLogin;?>");
+            $(goodTitle).html("<?php echo $goodPercent;?>%");
+            $(goodPercent).attr('aria-valuenow', "<?php echo $goodPercent;?>");
+            $(goodPercent).attr('style', "width: <?php echo $goodPercent;?>%");
             $(badCount).html("<?php echo $badLogin;?>");
-            $(badTitle).html("<?php echo $badPercent;?>%");            
-            $(badPercent).attr('aria-valuenow', "<?php echo $badPercent;?>");            
-            $(badPercent).attr('style', "width: <?php echo $badPercent;?>%"); 
+            $(badTitle).html("<?php echo $badPercent;?>%");
+            $(badPercent).attr('aria-valuenow', "<?php echo $badPercent;?>");
+            $(badPercent).attr('style', "width: <?php echo $badPercent;?>%");
             <?php endif; ?>
-            
+
         });
-        
+
         </script>
 
     </body>
