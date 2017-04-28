@@ -1,7 +1,3 @@
 Organizr
 -------
-Fork of [Organizr](https://github.com/causefx/Organizr/) with some custom styling
-
-Screenshot
--------
-![Screenshot](https://i.imgur.com/9CedPWy.jpg)
+Fork of the [Organizr](https://github.com/causefx/Organizr/) web service management tool with some custom styling
