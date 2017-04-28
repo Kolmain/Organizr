@@ -670,6 +670,11 @@ endif; ?>
 
         <div id="main-wrapper" class="main-wrapper">
 
+            <div class="background-container">
+                <div class="background-gradient-light"></div>
+                <div class="noise"></div>
+            </div>
+
             <!--Content-->
             <div id="content"  style="margin:0 10px; overflow:hidden">
 
@@ -771,7 +776,7 @@ endif; ?>
                                             <?php
                                             $dirname = "images/";
                                             $images = scandir($dirname);
-                                            $ignore = Array(".", "..", "favicon/", "favicon", "._.DS_Store", ".DS_Store", "confused.png", "sowwy.png", "sort-btns", "loading.png", "titlelogo.png", "default.svg", "login.png", "themes", "nadaplaying.jpg", "organizr-logo-h-d.png", "organizr-logo-h.png");
+                                            $ignore = Array(".", "..", "bg-light.png", "bg-dark.png", "noise.png", "favicon/", "favicon", "._.DS_Store", ".DS_Store", "confused.png", "sowwy.png", "sort-btns", "loading.png", "titlelogo.png", "default.svg", "login.png", "themes", "nadaplaying.jpg", "organizr-logo-h-d.png", "organizr-logo-h.png");
                                             foreach($images as $curimg){
                                                 if(!in_array($curimg, $ignore)) { ?>
 

@@ -38,6 +38,7 @@ $RECYCLE.BIN/
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
+.com.apple.timemachine.supported
 
 # Directories potentially created on remote AFP share
 .AppleDB
@@ -59,5 +60,6 @@ config/config.php
 config/users/
 config/users
 config/users.db
-
+images/favicon
+images/gbmedia.png
 
