@@ -60,6 +60,3 @@ config/config.php
 config/users/
 config/users
 config/users.db
-images/favicon
-images/gbmedia.png
-
